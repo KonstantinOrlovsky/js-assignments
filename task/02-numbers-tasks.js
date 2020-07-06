@@ -89,7 +89,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return - b / a;
+    return -b / a;
 }
 
 
@@ -112,8 +112,8 @@ function getLinearEquationRoot(a, b) {
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
 
-    let numerator =  (x1 * x2) + (y1 * y2);
-    let denominator =  Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2);
+    const numerator =  (x1 * x2) + (y1 * y2);
+    const denominator =  Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2);
     
     return Math.acos( numerator / denominator );
 }
@@ -130,7 +130,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return value.toString()[ value.toString().length - 1 ];
+    return value % 10;
   }
 
 
@@ -207,8 +207,9 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    return (n == 2 || n == 3 || n == 7 ) ? true :
-            (n % 3 == 0 || n % 2 == 0 || n % 7 == 0 ) ? false : true;
+    if ( n === 2 || n === 3 || n === 7 ) return true;
+    else if ( n % 3 === 0 || n % 2 === 0 || n % 7 === 0 ) return false;
+    else return true;
 }
 
 /**
@@ -227,7 +228,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    return Number(value) ? value : def;
+    return ( Number(value) || value === 0 ) ? value : def;
 }
 
 module.exports = {

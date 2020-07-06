@@ -60,7 +60,7 @@ function isLeapYear(date) {
    date.setDate(0);
    date.setHours(0,0,0);
 
-   return ( date.getDate() == 29 ) ? true : false;
+   return ( date.getDate() === 29 ) ? true : false;
 }
 
 
@@ -81,11 +81,27 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
 
-   const differenceDate = new Date(endDate - startDate).toISOString();
-   const days = differenceDate.slice(8,10) - 1;
-   const hours = differenceDate.slice(11,13);
-   
-   return  (days > 0) ? ( (days * 24 + +hours) + differenceDate.slice(13,23) ) : differenceDate.slice(11,23);
+   let date = {
+      days : endDate.getDate() - startDate.getDate(),
+      hours : endDate.getHours() - startDate.getHours(),
+      minutes : endDate.getMinutes() - startDate.getMinutes(),
+      seconds : endDate.getSeconds() - startDate.getSeconds(),
+      milliseconds : endDate.getMilliseconds() - startDate.getMilliseconds()
+     };
+     
+     date.hours +=  date.days * 24;
+     
+      for ( let elem in date){
+          if ( date[elem] < 10 ) {
+              date[elem] = '0' + date[elem];
+           }
+ 
+           if ( elem === 'milliseconds' && date[elem] < 100) {
+            date[elem] = '0' + date[elem]
+           }
+      }
+     
+      return `${date.hours}:${date.minutes}:${date.seconds}.${date.milliseconds}`;
 }
 
 
@@ -106,7 +122,7 @@ function angleBetweenClockHands(date) {
    
    let hours = date.getUTCHours();
 
-   if( hours > 12 ) hours -= 12;
+   if ( hours > 12 ) hours -= 12;
 
    const hoursAngle = 0.5 * ( 60 * hours  + date.getUTCMinutes() )
    const minutesAngle = 6 * date.getUTCMinutes();

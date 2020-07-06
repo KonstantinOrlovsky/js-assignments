@@ -207,14 +207,14 @@ function extractEmails(str) {
 function getRectangleString(width, height) {
     let result = "";
 
-    for(let i = 0; i < height; i++){
+    for (let i = 0; i < height; i++){
   
-      if(i == 0){
+      if (i === 0){
         result += `┌${'─'.repeat(width - 2)}┐\n`;
         continue;
       }
   
-     else if(i == height - 1){
+     else if (i === height - 1){
         result += `└${'─'.repeat(width - 2)}┘\n`;
         continue;
       }
@@ -247,9 +247,9 @@ function encodeToRot13(str) {
     
     let result = ''
   
-    for(let i of str){
+    for (let i of str){
       let index = alphabet.indexOf(i); 
-      result += (index == -1) ? i : alphabetSubst[index];
+      result += (index === -1) ? i : alphabetSubst[index];
     }
 
     return result;
@@ -270,9 +270,10 @@ function encodeToRot13(str) {
  */
 function isString(value) {         
     
-  return typeof(value) == 'string' ? true :
-         (typeof(value) == 'undefined' || value == null) ? false :
-         (typeof(value.valueOf())) == 'string' ? true : false;
+  if ( typeof(value) === 'string' ) return true;
+  else if ( (typeof(value) === 'undefined' || value === null) ) return false;
+  else if (  (typeof(value.valueOf())) === 'string' ) return true;
+  else return false;
 }
 
 

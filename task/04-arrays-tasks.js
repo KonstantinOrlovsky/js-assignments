@@ -85,7 +85,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   return arr.filter( elem => typeof elem == 'string' );
+   return arr.filter( elem => typeof elem === 'string' );
 }
 
 /**
@@ -306,7 +306,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter( elem => elem > 0 && typeof elem == 'number' ).length;
+  return arr.filter( elem => elem > 0 && typeof elem === 'number' ).length;
 }
  
 /** 
@@ -475,7 +475,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-    return arr.filter( (elem, index) => arr.indexOf(elem) == index );
+    return arr.filter( (elem, index) => arr.indexOf(elem) === index );
 }
 
 /**
@@ -512,7 +512,7 @@ function group(array, keySelector, valueSelector) {
    let map = new Map();
 
    return array.reduce( (acc, val) => map.set( keySelector(val), 
-                                             array.filter( elem => keySelector(elem) == keySelector(val) ).map(valueSelector) ), 1 );
+                                             array.filter( elem => keySelector(elem) === keySelector(val) ).map(valueSelector) ), 1 );
 }
 
 
@@ -569,9 +569,10 @@ function getElementByIndexes(arr, indexes) {
  */
 function swapHeadAndTail(arr) {
    const midlIndex = Math.floor(arr.length / 2);
-
-   return ( (arr.length % 2) != 0 ) ? [].concat( arr.slice( midlIndex + 1, arr.length ), arr[midlIndex], arr.slice( 0, midlIndex ) ) :
-                                  [].concat( arr.slice( midlIndex, arr.length ), arr.slice( 0, midlIndex ) );
+   if ( (arr.length % 2) != 0 ) {
+     return [].concat( arr.slice( midlIndex + 1, arr.length ), arr[midlIndex], arr.slice( 0, midlIndex ) );
+   }
+   else return [].concat( arr.slice( midlIndex, arr.length ), arr.slice( 0, midlIndex ) );
 }
 
 module.exports = {
