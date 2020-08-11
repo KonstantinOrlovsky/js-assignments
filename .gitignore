@@ -36,3 +36,5 @@ node_modules
 # Editors crap
 .vscode
 .idea
+/.vs/js-assignments/v16
+/.vs
